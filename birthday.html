@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday 💙</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+    font-family:'Montserrat',sans-serif;
+    background:#000;
+    color:#fff;
+    height:100vh;
+    overflow:hidden;
+}
+
+/* ================= FRONT PAGE ================= */
+#front-page{position:fixed;inset:0;z-index:10;}
+
+.bg-img{
+    position:absolute;inset:0;
+    background:url("wrap.jpg.jpeg") center/cover no-repeat;
+    filter:blur(24px) brightness(.42);
+    transform:scale(1.25);
+}
+
+.overlay{
+    position:absolute;inset:0;
+    background:
+      radial-gradient(circle at top, rgba(120,190,255,.35), transparent 55%),
+      linear-gradient(to bottom, rgba(0,0,0,.45), rgba(0,0,0,.96));
+}
+
+/* Sparkles */
+.sparkle{
+    position:absolute;width:4px;height:4px;
+    background:#cfe9ff;border-radius:50%;
+    box-shadow:0 0 10px rgba(160,210,255,.9);
+    animation:twinkle linear infinite;opacity:.7;
+}
+@keyframes twinkle{
+    50%{opacity:.25;transform:scale(.6);}
+}
+
+.front-content{
+    position:relative;z-index:5;height:100%;
+    display:flex;flex-direction:column;
+    justify-content:center;align-items:center;
+    text-align:center;padding:24px;
+}
+
+/* Title */
+.birthday-title{
+    font-family:'Dancing Script',cursive;
+    font-size:3rem;color:#d6ecff;
+    animation:glow 3.5s ease-in-out infinite;
+}
+@keyframes glow{
+    50%{text-shadow:0 0 28px rgba(120,190,255,.9);}
+}
+
+.name{
+    letter-spacing:4px;
+    margin:14px 0 26px;
+    color:#eef6ff;
+}
+
+/* Image */
+.image-frame{
+    padding:12px;border-radius:26px;
+    background:rgba(255,255,255,.06);
+    backdrop-filter:blur(8px);
+    border:1px solid rgba(170,220,255,.35);
+    box-shadow:0 0 60px rgba(116,185,255,.45);
+}
+
+.front-main-img{
+    width:270px;
+    max-width:82vw;
+    aspect-ratio:3/4;
+    object-fit:cover;
+    border-radius:20px;
+}
+
+.front-date{
+    margin-top:18px;
+    letter-spacing:6px;
+    font-size:.75rem;
+    color:#cfe6ff;
+}
+
+.btn-open{
+    margin-top:32px;
+    padding:16px 64px;
+    border-radius:60px;border:none;
+    background:linear-gradient(135deg,#74b9ff,#0984e3);
+    color:#fff;letter-spacing:4px;
+    cursor:pointer;
+    box-shadow:0 0 42px rgba(116,185,255,.7);
+}
+
+/* ================= INSIDE PAGE ================= */
+#inside-page{
+    position:fixed;inset:0;
+    display:flex;flex-direction:column;
+    justify-content:center;align-items:center;
+    padding:24px;text-align:center;
+    opacity:0;transform:scale(.96);
+    transition:1.5s ease;
+}
+
+.carousel{
+    width:92vw;
+    max-width:440px;
+    height:65vh;
+    position:relative;
+    margin-bottom:24px;
+}
+
+.carousel img{
+    position:absolute;inset:0;
+    width:100%;height:100%;
+    object-fit:contain;
+    opacity:0;
+    transition:opacity 1.5s ease;
+}
+.carousel img.active{opacity:1;}
+
+.thought{
+    line-height:1.9;
+    color:#d5e4f5;
+    max-width:440px;
+    font-size:1rem;
+}
+
+.signature{
+    margin-top:22px;
+    font-family:'Dancing Script',cursive;
+    font-size:2rem;
+    color:#8fc8ff;
+}
+
+/* 💙 Blue hearts */
+.blue-heart{
+    position:fixed;top:-10%;
+    animation:fall linear forwards;
+    pointer-events:none;
+    opacity:.7;
+}
+@keyframes fall{
+    to{transform:translateY(110vh);opacity:0;}
+}
+
+/* Reveal */
+.active #front-page{
+    transform:translateY(-100%);
+    transition:1.2s cubic-bezier(.8,0,.2,1);
+}
+.active #inside-page{
+    opacity:1;
+    transform:scale(1);
+}
+
+/* ================= MOBILE FIX (IMPORTANT) ================= */
+@media (max-width: 600px){
+
+    .birthday-title{
+        font-size:2.4rem;   /* not too big */
+    }
+
+    .name{
+        font-size:.9rem;
+        margin-bottom:20px;
+    }
+
+    .front-main-img{
+        width:230px;
+    }
+
+    .btn-open{
+        padding:14px 48px;
+        letter-spacing:3px;
+        margin-top:26px;
+    }
+
+    .carousel{
+        height:55vh;       /* prevents overflow */
+    }
+
+    .thought{
+        font-size:.95rem;
+        line-height:1.7;
+    }
+
+    .signature{
+        font-size:1.8rem;
+    }
+}
+</style>
+</head>
+
+<body id="root">
+
+<audio id="bg-music" src="happy-birthday-471211.mp3" preload="auto" loop></audio>
+
+<!-- FRONT -->
+<div id="front-page">
+    <div class="bg-img"></div>
+    <div class="overlay"></div>
+
+    <div class="front-content">
+        <div class="birthday-title">Happy Birthday</div>
+        <div class="name">PRECIOUS 💙</div>
+
+        <div class="image-frame">
+            <img src="wrap.jpg.jpeg" class="front-main-img">
+        </div>
+
+        <div class="front-date">FEBRUARY 09 ✦</div>
+        <button class="btn-open" onclick="start()">Open Your Surprise</button>
+    </div>
+</div>
+
+<!-- INSIDE -->
+<div id="inside-page">
+    <div class="carousel">
+        <img src="inner.jpg.jpeg" class="active">
+        <img src="inner1.jpg">
+        <img src="inner2.jpg">
+        <img src="inner3.jpg">
+        <img src="inner4.jpg">
+    </div>
+
+    <div class="thought" id="thought"></div>
+    <div class="signature">With love, Aathu 💙</div>
+</div>
+
+<script>
+/* Sparkles */
+function sparkle(){
+    const s=document.createElement("div");
+    s.className="sparkle";
+    s.style.left=Math.random()*100+"vw";
+    s.style.top=Math.random()*100+"vh";
+    s.style.animationDuration=(Math.random()*3+3)+"s";
+    document.getElementById("front-page").appendChild(s);
+    setTimeout(()=>s.remove(),6000);
+}
+setInterval(sparkle,350);
+
+/* Blue hearts */
+function blueHeart(){
+    const h=document.createElement("div");
+    h.className="blue-heart";
+    h.innerHTML="💙";
+    h.style.left=Math.random()*100+"vw";
+    h.style.fontSize=(Math.random()*14+14)+"px";
+    h.style.animationDuration=(Math.random()*4+4)+"s";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),8000);
+}
+
+/* Carousel thoughts */
+const imgs=document.querySelectorAll(".carousel img");
+const thoughts=[
+ "Your presence itself is a gift. You make ordinary moments feel calm, safe, and meaningful 💙",
+ "In a world that moves too fast, you are the place where hearts slow down and breathe peacefully ✨",
+ "You may never realize it, but your kindness quietly changes the lives around you 🌸",
+ "Some people don’t need to promise forever — they become forever just by being themselves 💙",
+ "May life always be gentle with you, and may love find you in every form, always 💙"
+];
+
+let i=0;
+const t=document.getElementById("thought");
+t.innerText=thoughts[0];
+
+setInterval(()=>{
+    imgs[i].classList.remove("active");
+    i=(i+1)%imgs.length;
+    imgs[i].classList.add("active");
+    t.innerText=thoughts[i];
+},4200);
+
+function start(){
+    document.getElementById("root").classList.add("active");
+
+    const music=document.getElementById("bg-music");
+    music.volume=0;
+    music.play().catch(()=>{});
+
+    let v=0;
+    const fade=setInterval(()=>{
+        if(v<0.55){v+=0.02;music.volume=v}
+        else clearInterval(fade);
+    },200);
+
+    setInterval(blueHeart,400);
+}
+</script>
+
+</body>
+</html>
